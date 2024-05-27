@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://by4s5jboqq4vb"]
+
+[ext_resource type="Script" path="res://Floor/Domain/Tile.gd" id="1_bwob4"]
+
+[node name="Tile" type="Node2D"]
+script = ExtResource("1_bwob4")
+
+[node name="Sprite" type="Sprite2D" parent="."]

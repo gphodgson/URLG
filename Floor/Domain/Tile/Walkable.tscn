@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpro22rb124jl"]
+
+[ext_resource type="Script" path="res://Floor/Domain/Tile/Walkable.gd" id="1_e3ubf"]
+
+[node name="Walkable" type="Node2D"]
+script = ExtResource("1_e3ubf")
+
+[node name="Sprite" type="Sprite2D" parent="."]
