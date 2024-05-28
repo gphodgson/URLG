@@ -13,10 +13,12 @@ func init() -> State:
 	self.player = PLAYER_NODE.instantiate().init(Vector2.ZERO);
 	return self;
 
-func isMovementValid(pos:Vector2)->bool:
+func isMovementValid(pos:Vector2, origin:Entity)->bool:
 	if(self.isOutOfBounds(pos)):
 		return false;
-	if(self.getTile(pos).TYPE == Tile.TileType.EMPTY):
+	if(self.getTile(pos).TYPE != Tile.TileType.WALKABLE):
+		if(origin.hasTrait("PHASE_TRAIT")):
+			return true;
 		return false;
 	
 	return true;
@@ -40,7 +42,7 @@ func UpdateTileState(newState:State) -> void:
 	self.setPlayer(newState.player);
 
 func getTile(pos:Vector2) -> Tile:
-	if(pos.x > self.dim.x || pos.y > self.dim.y):
+	if(pos.x >= self.dim.x || pos.y >= self.dim.y || pos.x < 0 || pos.y < 0):
 		self.fatal("getTile | Invalid pos provided.", {"pos": pos, "dim": self.dim})
 		return;
 	return self.state[pos.x][pos.y];

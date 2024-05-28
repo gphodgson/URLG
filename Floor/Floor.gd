@@ -1,10 +1,11 @@
 class_name Floor extends GameObject
 
-const FLOOR_MAX_WIDTH = 15;
-const FLOOR_MAX_HEIGHT = 15;
+const FLOOR_MAX_WIDTH = 50;
+const FLOOR_MAX_HEIGHT = 50;
 
 var TYPE:FloorType = FloorType.NULL;
 var BASIC_FLOOR_TEXTURE:Texture2D = load("res://Sprites/Floor.png");
+var WALL_TEXTURE:Texture2D = load("res://Sprites/Wall.png");
 
 var queue:Queue;
 
@@ -27,7 +28,7 @@ func queueEvent(event:Event)->void:
 	self.queue.addEventToQueue(event);
 
 func isMovementValid(pos:Vector2)->bool:
-	return self.state.isMovementValid(pos);
+	return self.state.isMovementValid(pos, self.state.player);
 
 func getPlayer()->Player:
 	return self.state.player;

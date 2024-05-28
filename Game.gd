@@ -34,6 +34,9 @@ func _input(event):
 	if event.is_action_pressed("wait"):
 		self.wait();
 		
+	if event.is_action_pressed("debug1"):
+		self.debugFloor.state.player.addTrait(PhaseTrait.new().init());
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
