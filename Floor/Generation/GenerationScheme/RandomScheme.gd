@@ -26,6 +26,6 @@ func GenerateState(floor:Floor) -> State:
 			self.state.player.setPos(tile.pos);
 			cycle = false;
 		else:
-			self.debug("GenerateState | Tried to place player, failed", {"attemptPos": tile.pos})
+			self.debug("RandomScheme.GenerateState | Tried to place player, failed", {"attemptPos": tile.pos})
 		
 	return self.state;

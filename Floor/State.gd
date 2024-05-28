@@ -4,7 +4,7 @@ var state:Array = [];
 var player:Player;
 var dim:Vector2 = Vector2.ZERO;
 
-var PLAYER_NODE = load("res://Player/Player.tscn")
+var PLAYER_NODE = load("res://Entity/Player/Player.tscn")
 
 func init() -> State:
 	self.FillEmpty();
