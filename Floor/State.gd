@@ -1,6 +1,7 @@
 class_name State extends GameObject
 
 var state:Array = [];
+var mobs:Array[Mob] = [];
 var player:Player;
 var dim:Vector2 = Vector2.ZERO;
 
@@ -11,7 +12,21 @@ func init() -> State:
 	self.initalizeDimensions();
 	self.player = PLAYER_NODE.instantiate().init(Vector2.ZERO);
 	return self;
+
+func isMovementValid(pos:Vector2)->bool:
+	if(self.isOutOfBounds(pos)):
+		return false;
+	if(self.getTile(pos).TYPE == Tile.TileType.EMPTY):
+		return false;
 	
+	return true;
+
+func isOutOfBounds(pos:Vector2)->bool:
+	return pos.x < 0 || \
+		pos.x >= self.dim.x || \
+		pos.y < 0 || \
+		pos.y >= self.dim.y;
+
 func UpdateTileState(newState:State) -> void:
 	if(newState.dim != self.dim):
 		self.fatal("UpdateTileState | Invalid newState Dimensions", {"stateDim": self.dim, "newStateDim": newState.dim});
@@ -20,7 +35,8 @@ func UpdateTileState(newState:State) -> void:
 	for x in range(newState.state.size()):
 		for y in range(newState.state[x].size()):
 			self.setTile(Vector2(x,y), newState.getTile(Vector2(x,y)))
-			
+	
+	self.mobs = newState.mobs;
 	self.setPlayer(newState.player);
 
 func getTile(pos:Vector2) -> Tile:
@@ -37,6 +53,9 @@ func setTile(pos:Vector2, newTile:Tile) -> void:
 
 func setPlayer(newPlayer:Player)->void:
 	self.player.cloneFromPlayer(newPlayer);
+
+func addMob(mob:Mob)->void:
+	self.mobs.append(mob);
 
 func initalizeDimensions() -> void:
 	var y = self.state.size();

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://csu1lymrb6lec"]
+
+[ext_resource type="Script" path="res://Entity/Mob/Domain/Monster.gd" id="1_q8a4u"]
+
+[node name="Monster" type="Node2D"]
+script = ExtResource("1_q8a4u")
+
+[node name="Sprite" type="Sprite2D" parent="."]

@@ -23,3 +23,4 @@ func cloneFromEntity(newEntity:Entity)->void:
 	self.setPos(newEntity.pos);
 	self.texture = newEntity.texture;
 	self.updateSpriteTexture();
+	
