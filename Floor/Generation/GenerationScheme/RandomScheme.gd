@@ -2,6 +2,7 @@ class_name RandomScheme extends GenerationScheme
 
 const WALKABLETILE = preload("res://Floor/Domain/Tile/Walkable.tscn")
 const EMPTYTILE = preload("res://Floor/Domain/Tile/Empty.tscn")
+const MONSTER = preload("res://Entity/Mob/Domain/Monster.tscn")
 
 var playerPlaced = false;
 
@@ -10,6 +11,9 @@ func GenerateState(floor:Floor) -> State:
 		for y in self.state.dim.y:
 			if(randi_range(1,2) == 1):
 				var walkableTile = WALKABLETILE.instantiate().init(floor.BASIC_FLOOR_TEXTURE, Vector2(x,y));
+				if(randi_range(1,10) == 10):
+					self.debug("RandomeScheme.GenerateState | added Monster", {"pos": Vector2(x,y)})
+					self.state.addMob(MONSTER.instantiate().init(Vector2(x,y), self.state));
 				self.state.setTile(Vector2(x,y), walkableTile);
 			else:
 				var emptyTile = EMPTYTILE.instantiate().init(floor.EMPTY_TEXTURE, Vector2(x,y));
