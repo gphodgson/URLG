@@ -21,7 +21,10 @@ func alert(
 	context:Dictionary
 ) -> void:
 	print("------------------------------------------");
-	print("ALERT: %s | Class: %s -- URLG -- !!" % [severity, get_class()]);
+	print("ALERT: %s | Class: %s -- URLG -- !!" % [severity, self.getClassName()]);
 	print(message)
 	print(context)
 	print("------------------------------------------");
+
+func getClassName()->String:
+	return "GameObject -- BASE add getClassName to class!!"

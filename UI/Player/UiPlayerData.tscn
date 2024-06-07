@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb6vurpnqsc6x"]
+
+[ext_resource type="Script" path="res://UI/Player/UiPlayerData.gd" id="1_74fsf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qmi0s"]
+font_size = 34
+font_color = Color(0, 0, 0, 1)
+
+[node name="UiPlayerData" type="Node2D"]
+script = ExtResource("1_74fsf")
+
+[node name="hp" type="Label" parent="."]
+offset_top = 592.0
+offset_right = 40.0
+offset_bottom = 615.0
+label_settings = SubResource("LabelSettings_qmi0s")

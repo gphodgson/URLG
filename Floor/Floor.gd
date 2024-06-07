@@ -6,6 +6,10 @@ const FLOOR_MAX_HEIGHT = 50;
 var TYPE:FloorType = FloorType.NULL;
 var BASIC_FLOOR_TEXTURE:Texture2D = load("res://Sprites/Floor.png");
 var WALL_TEXTURE:Texture2D = load("res://Sprites/Wall.png");
+var BLUE_TEXTURE:Texture2D = load("res://Sprites/Blue.png");
+var RED_TEXTURE:Texture2D = load("res://Sprites/Red.png");
+var GREEN_TEXTURE:Texture2D = load("res://Sprites/Green.png");
+var PURPLE_TEXTURE:Texture2D = load("res://Sprites/Purple.png");
 
 var queue:Queue;
 
@@ -51,11 +55,24 @@ func queueMobEvents():
 	for mob in self.state.mobs:
 		self.queueEvent(mob.getNextEvent());
 
+func interaction():
+	var target:Entity = self.state.player.getTarget(self.state);
+	if target != null:
+		target.onInteraction();
+
+func attack():
+	var target:Entity = self.state.player.getTarget(self.state);
+	if target != null:
+		self.queue.addEventToQueue(KillEvent.new().init(target));
+		get_parent().step();
+		
+
 func step():
 	self.queueMobEvents();
 	
 	self.queue.execute();
 	self.queue.clearEvents();
+	self.state.removeFreedMobs();
 
 func init()->Floor:
 	self.loadConsts();

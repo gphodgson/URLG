@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp4r3w3v0h2et"]
+
+[ext_resource type="Script" path="res://Effect/Domain/BouncingParticle/BouncingParticle.gd" id="1_ld4ra"]
+
+[node name="BouncingParticle" type="Node2D"]
+script = ExtResource("1_ld4ra")
