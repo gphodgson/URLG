@@ -13,6 +13,14 @@ func init() -> State:
 	self.player = PLAYER_NODE.instantiate().init(Vector2.ZERO);
 	return self;
 
+func removeFreedMobs()->void:
+	var i:int = 0;
+	while i < len(self.mobs):
+		if self.mobs[i] == null:
+			self.mobs.remove_at(i);
+		i+=1;
+		
+
 func isMovementValid(pos:Vector2, origin:Entity)->bool:
 	if(self.isOutOfBounds(pos)):
 		return false;
@@ -20,8 +28,25 @@ func isMovementValid(pos:Vector2, origin:Entity)->bool:
 		if(origin.hasTrait("PHASE_TRAIT")):
 			return true;
 		return false;
+	if(self.tileHasEntity(pos)):
+		return false;
 	
 	return true;
+
+func tileHasEntity(pos:Vector2)->bool:
+	self.removeFreedMobs();
+	for mob in self.mobs:
+		if mob.pos == pos || self.player.pos == pos:
+			return true
+	return false;
+
+func getEntityOnTile(pos:Vector2)->Entity:
+	for mob in self.mobs:
+		if mob.pos == pos:
+			return mob;
+		if player.pos == pos:
+			return player;
+	return null;
 
 func isOutOfBounds(pos:Vector2)->bool:
 	return pos.x < 0 || \
@@ -43,13 +68,13 @@ func UpdateTileState(newState:State) -> void:
 
 func getTile(pos:Vector2) -> Tile:
 	if(pos.x >= self.dim.x || pos.y >= self.dim.y || pos.x < 0 || pos.y < 0):
-		self.fatal("getTile | Invalid pos provided.", {"pos": pos, "dim": self.dim})
+		self.warning("getTile | Invalid pos provided.", {"pos": pos, "dim": self.dim})
 		return;
 	return self.state[pos.x][pos.y];
 
 func setTile(pos:Vector2, newTile:Tile) -> void:
-	if(pos.x > self.dim.x || pos.y > self.dim.y):
-		self.fatal("setTile | Invalid pos provided.", {"pos": pos, "dim": self.dim})
+	if(pos.x >= self.dim.x || pos.y >= self.dim.y || pos.x < 0 || pos.y < 0):
+		self.warning("setTile | Invalid pos provided.", {"pos": pos, "dim": self.dim})
 		return;
 	self.getTile(pos).changeToTile(newTile);
 
@@ -75,3 +100,5 @@ func FillEmpty() -> void:
 			var tile = Floor.EMPTY_CELL.instantiate().init(Floor.EMPTY_TEXTURE, Vector2(i,j))
 			state[i].append(tile);
 	
+func getClassName()->String:
+	return "State"

@@ -9,3 +9,5 @@ script = ExtResource("1_kbi8i")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+
+[node name="DirSprite" type="Sprite2D" parent="."]

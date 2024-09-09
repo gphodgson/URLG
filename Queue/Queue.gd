@@ -3,7 +3,7 @@ class_name Queue extends GameObject
 var events:Array[Event] = [];
 
 func init()-> Queue:
-	self.debug("Queue.init | Created empty queue", {});
+	self.debug("init | Created empty queue", {});
 	return self;
 	
 func execute():
@@ -15,3 +15,6 @@ func addEventToQueue(event:Event)->void:
 
 func clearEvents()->void:
 	events = [];
+
+func getClassName()->String:
+	return "Queue"

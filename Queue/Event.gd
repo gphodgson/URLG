@@ -8,7 +8,9 @@ var type:EventType = EventType.NULL;
 enum EventType{
 	NULL,
 	MOVEMENT,
-	WAIT
+	WAIT,
+	EFFECT,
+	KILL,
 }
 
 func execute()->void:
